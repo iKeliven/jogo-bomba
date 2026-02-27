@@ -1,0 +1,68 @@
+h1{
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 30px;
+    font-weight: bolder;
+}
+button{
+    border-width: 6px;
+    width: 100px;
+    height: 100px;
+    line-height: 100px; /* centralizar verticalmente o X e o O no Botão */
+    background-color: white;
+    font-size: 100px;
+    border-left: 0;
+    border-top: 0;
+    vertical-align: top; /* Para o botão não sair do lugar na tela */
+    border-radius: 50px;
+    margin: 7px;
+}
+button:hover{
+    background-color: azure;
+    cursor: pointer;
+}
+
+.btJogoCol5:hover{
+    background-color: azure;
+    cursor: pointer;
+}
+
+.btJogoCol5::before{
+    content: "Verificar";
+    position: absolute; /* Importante para o posicionamento */
+      top: 0; /* Posiciona o pseudo-elemento no topo */
+      left: 0; /* Posiciona o pseudo-elemento à esquerda */
+      right: 0; /* Preenche o restante da largura */
+      bottom: 0; /* Preenche o restante da altura */
+      display: flex; /* Alinha o texto no centro do botão */
+      justify-content: center; /* Alinha o texto no centro horizontalmente */
+      align-items: center; /* Alinha o texto no centro verticalmente */
+      z-index: 1;
+}
+
+.btJogoCol5{
+    position: relative;
+    font-size: 16px;
+    border-width: 3px;
+    width: 100px;
+    height: 50px;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: rgb(0, 0, 0);
+    background-color: rgb(208, 201, 193);
+    margin-top: 30px;
+}
+
+.btJogoCol6, .btJogoCol7, .btJogoCol8, .btJogoCol9, .btJogoCol10{
+    margin-top: 45px;
+    border-radius: 50px;
+    border-width: 3px;
+    border-style: solid;
+    border-color: rgb(0, 0, 0);
+    width: 20px;
+    height: 20px;
+}
+
+button:disabled{
+    border-color: black; /* Não deixar as bordas cinzas quando clicado(Padrão disabled) */
+}
