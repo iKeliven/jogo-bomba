@@ -4,9 +4,48 @@ for(let i = 0; i < tabuleiro.length;i++){
     tabuleiro[i] = new Array(11)
 }
 
-let gameState = "armed"
+const gameRoot = document.getElementById('gameScreen') || document.body
+
+let gameState = "idle"
 let remainingSeconds = 180
 let timerIntervalId = null
+
+function enableLine(linha){
+    for(let x = 0; x < 5; x++){
+        const bt = document.getElementById("bt" + linha + "" + x)
+        if(bt) bt.disabled = false
+    }
+    const v = document.getElementById("btVerifica" + linha)
+    if(v) v.disabled = false
+}
+
+function initIdle(){
+    remainingSeconds = 180
+    setTimerText()
+    setAllButtonsDisabled(true)
+    const playBtn = document.getElementById('playBtn')
+    if(playBtn) playBtn.disabled = false
+
+    const startScreen = document.getElementById('startScreen')
+    const gameScreen = document.getElementById('gameScreen')
+    if(startScreen) startScreen.hidden = false
+    if(gameScreen) gameScreen.hidden = true
+}
+
+function startGame(){
+    if(gameState !== "idle") return
+    gameState = "armed"
+    const playBtn = document.getElementById('playBtn')
+    if(playBtn) playBtn.disabled = true
+
+    const startScreen = document.getElementById('startScreen')
+    const gameScreen = document.getElementById('gameScreen')
+    if(startScreen) startScreen.hidden = true
+    if(gameScreen) gameScreen.hidden = false
+
+    enableLine(0)
+    startTimer()
+}
 
 function pad2(n){
     return String(n).padStart(2, '0')
@@ -92,7 +131,7 @@ function isLineCorrect(linha){
 }
 for(let i = 0; i < tabuleiro.length;i++){
     quebraLinha = document.createElement('br');
-    document.body.append(quebraLinha);
+    gameRoot.append(quebraLinha);
     for(let j = 0; j < tabuleiro[i].length; j++){
         button = document.createElement('button')
         button.setAttribute('type','button')
@@ -112,14 +151,19 @@ for(let i = 0; i < tabuleiro.length;i++){
         button.setAttribute('class', 'btJogo' + i )
         button.setAttribute('class', 'btJogoCol' + j )
         button.append(document.createTextNode(""));
-        document.body.append(button);
+        gameRoot.append(button);
     }
 }
 let h1 = document.createElement('h1')
 h1.setAttribute('id', 'resultado')
-document.body.append(h1);
+gameRoot.append(h1);
 
-startTimer()
+const playBtn = document.getElementById('playBtn')
+if(playBtn){
+    playBtn.addEventListener('click', startGame)
+}
+
+initIdle()
 
 function marca(linha, coluna){
     if(coluna < 5)
