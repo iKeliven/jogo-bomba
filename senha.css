@@ -1,29 +1,102 @@
-h1{
-    text-align: center;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 30px;
-    font-weight: bolder;
+:root{
+    --bg0: #050510;
+    --bg1: #0b0b1d;
+    --neonA: #7c3aed;
+    --neonB: #22d3ee;
+    --neonC: #f97316;
+    --text: rgba(255, 255, 255, 0.92);
+    --muted: rgba(255, 255, 255, 0.65);
+    --panel: rgba(255, 255, 255, 0.06);
+    --panel2: rgba(255, 255, 255, 0.10);
+    --stroke: rgba(255, 255, 255, 0.16);
+    --shadow: 0 18px 60px rgba(0, 0, 0, 0.55);
 }
+
+body{
+    margin: 0;
+    min-height: 100vh;
+    padding: 28px 16px 56px;
+    color: var(--text);
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    text-align: center;
+    background:
+        radial-gradient(900px 500px at 20% 10%, rgba(124, 58, 237, 0.26), transparent 60%),
+        radial-gradient(900px 500px at 85% 20%, rgba(34, 211, 238, 0.22), transparent 55%),
+        radial-gradient(900px 500px at 40% 95%, rgba(249, 115, 22, 0.16), transparent 55%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+}
+
+hr{
+    width: min(820px, 92vw);
+    border: 0;
+    height: 1px;
+    margin: 14px auto 22px;
+    background: linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.50), rgba(124, 58, 237, 0.55), transparent);
+}
+
+h1{
+    margin: 0;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: center;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: clamp(26px, 3.4vw, 40px);
+    font-weight: 900;
+    background: linear-gradient(90deg, rgba(34, 211, 238, 0.95), rgba(124, 58, 237, 0.95));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 28px rgba(34, 211, 238, 0.12);
+}
+
 button{
-    border-width: 6px;
     width: 100px;
     height: 100px;
     line-height: 100px; /* centralizar verticalmente o X e o O no Botão */
-    background-color: white;
-    font-size: 100px;
+    margin: 7px;
+    vertical-align: top; /* Para o botão não sair do lugar na tela */
+
+    border-radius: 18px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.16);
     border-left: 0;
     border-top: 0;
-    vertical-align: top; /* Para o botão não sair do lugar na tela */
-    border-radius: 50px;
-    margin: 7px;
+
+    background-color: rgba(255, 255, 255, 0.07);
+    background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.03));
+    color: var(--text);
+
+    font-size: 100px;
+    box-shadow:
+        0 12px 28px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: transform 140ms ease, box-shadow 140ms ease, border-color 140ms ease, filter 140ms ease;
 }
+
 button:hover{
-    background-color: azure;
     cursor: pointer;
+    transform: translateY(-1px);
+    border-color: rgba(34, 211, 238, 0.38);
+    box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.45),
+        0 0 0 1px rgba(34, 211, 238, 0.14),
+        0 0 26px rgba(34, 211, 238, 0.10),
+        inset 0 1px 0 rgba(255, 255, 255, 0.14);
+}
+
+button:focus-visible{
+    outline: none;
+    box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.45),
+        0 0 0 2px rgba(34, 211, 238, 0.60),
+        0 0 0 6px rgba(124, 58, 237, 0.20),
+        inset 0 1px 0 rgba(255, 255, 255, 0.14);
 }
 
 .btJogoCol5:hover{
-    background-color: azure;
     cursor: pointer;
 }
 
@@ -38,31 +111,249 @@ button:hover{
       justify-content: center; /* Alinha o texto no centro horizontalmente */
       align-items: center; /* Alinha o texto no centro verticalmente */
       z-index: 1;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
 }
 
 .btJogoCol5{
     position: relative;
-    font-size: 16px;
-    border-width: 3px;
-    width: 100px;
-    height: 50px;
-    border-radius: 5px;
-    border-style: solid;
-    border-color: rgb(0, 0, 0);
-    background-color: rgb(208, 201, 193);
+    font-size: 14px;
+    width: 114px;
+    height: 52px;
     margin-top: 30px;
+    border-radius: 14px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(124, 58, 237, 0.40);
+    background-color: rgba(124, 58, 237, 0.16);
+    background-image: linear-gradient(90deg, rgba(124, 58, 237, 0.22), rgba(34, 211, 238, 0.12));
+    box-shadow:
+        0 16px 45px rgba(0, 0, 0, 0.42),
+        0 0 0 1px rgba(124, 58, 237, 0.18),
+        0 0 24px rgba(124, 58, 237, 0.16);
 }
 
 .btJogoCol6, .btJogoCol7, .btJogoCol8, .btJogoCol9, .btJogoCol10{
     margin-top: 45px;
-    border-radius: 50px;
-    border-width: 3px;
+    border-radius: 999px;
+    border-width: 1px;
     border-style: solid;
-    border-color: rgb(0, 0, 0);
+    border-color: rgba(255, 255, 255, 0.16);
     width: 20px;
     height: 20px;
+    background-color: rgba(255, 255, 255, 0.06);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.10),
+        0 10px 25px rgba(0, 0, 0, 0.35);
 }
 
 button:disabled{
-    border-color: black; /* Não deixar as bordas cinzas quando clicado(Padrão disabled) */
+    border-color: rgba(255, 255, 255, 0.20); /* Não deixar as bordas cinzas quando clicado(Padrão disabled) */
+    cursor: not-allowed;
+    opacity: 0.78;
+    transform: none;
+    filter: saturate(0.92);
+}
+
+#hud{
+    width: min(820px, 92vw);
+    margin: 0 auto 14px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.timer{
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    padding: 10px 12px;
+    border-radius: 14px;
+    border: 1px solid rgba(34, 211, 238, 0.28);
+    background: linear-gradient(90deg, rgba(34, 211, 238, 0.14), rgba(124, 58, 237, 0.12));
+    box-shadow:
+        0 10px 26px rgba(0, 0, 0, 0.35),
+        0 0 24px rgba(34, 211, 238, 0.10);
+    min-width: 104px;
+}
+
+.timer.timer--danger{
+    border-color: rgba(249, 115, 22, 0.50);
+    box-shadow:
+        0 10px 26px rgba(0, 0, 0, 0.35),
+        0 0 28px rgba(249, 115, 22, 0.16);
+    animation: timerPulse 900ms ease-in-out infinite;
+}
+
+.bomb{
+    width: 88px;
+    height: 88px;
+    border-radius: 18px;
+    position: relative;
+    background:
+        radial-gradient(circle at 30% 28%, rgba(255, 255, 255, 0.20), transparent 48%),
+        radial-gradient(circle at 70% 80%, rgba(34, 211, 238, 0.14), transparent 52%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.04));
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow:
+        0 16px 40px rgba(0, 0, 0, 0.40),
+        0 0 28px rgba(124, 58, 237, 0.16);
+    animation: bombPulse 820ms ease-in-out infinite;
+}
+
+.bomb::before{
+    content: "";
+    position: absolute;
+    left: 22px;
+    top: 28px;
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    background:
+        radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.20), transparent 44%),
+        linear-gradient(180deg, rgba(0, 0, 0, 0.92), rgba(24, 24, 48, 0.92));
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.12),
+        0 0 18px rgba(34, 211, 238, 0.10);
+}
+
+.bomb::after{
+    content: "";
+    position: absolute;
+    left: 56px;
+    top: 14px;
+    width: 18px;
+    height: 18px;
+    border-radius: 999px;
+    background: radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.30), rgba(249, 115, 22, 0.90));
+    box-shadow:
+        0 0 18px rgba(249, 115, 22, 0.55),
+        0 0 34px rgba(249, 115, 22, 0.26);
+}
+
+.bomb > .spark,
+.bomb .spark{ display: none; }
+
+.bomb:not(.bomb--disarmed):not(.bomb--exploded)::marker{ content: ""; }
+
+.bomb:not(.bomb--disarmed):not(.bomb--exploded)::after{
+    animation: fuseFlicker 240ms linear infinite;
+}
+
+.bomb:not(.bomb--disarmed):not(.bomb--exploded){
+    animation: bombPulse 820ms ease-in-out infinite, bombShake 1400ms ease-in-out infinite;
+}
+
+.bomb.bomb--disarmed{
+    animation: none;
+    box-shadow:
+        0 16px 40px rgba(0, 0, 0, 0.40),
+        0 0 28px rgba(34, 211, 238, 0.22);
+}
+
+.bomb.bomb--exploded{
+    animation: explode 650ms ease-out forwards;
+}
+
+.bomb.bomb--exploded::before,
+.bomb.bomb--exploded::after{
+    opacity: 0;
+}
+
+@keyframes bombPulse{
+    0%, 100%{ transform: translateY(0) scale(1); filter: saturate(1); }
+    50%{ transform: translateY(-1px) scale(1.02); filter: saturate(1.12); }
+}
+
+@keyframes bombShake{
+    0%, 100%{ transform: translateY(0) rotate(0deg) scale(1); }
+    20%{ transform: translateY(-1px) rotate(-0.9deg) scale(1.01); }
+    40%{ transform: translateY(0) rotate(0.7deg) scale(1); }
+    60%{ transform: translateY(-1px) rotate(-0.6deg) scale(1.01); }
+    80%{ transform: translateY(0) rotate(0.4deg) scale(1); }
+}
+
+@keyframes fuseFlicker{
+    0%{ filter: brightness(1) saturate(1); transform: translateY(0) scale(1); }
+    50%{ filter: brightness(1.35) saturate(1.2); transform: translateY(-1px) scale(1.08); }
+    100%{ filter: brightness(1) saturate(1); transform: translateY(0) scale(1); }
+}
+
+@keyframes timerPulse{
+    0%, 100%{ transform: scale(1); }
+    50%{ transform: scale(1.03); }
+}
+
+@keyframes explode{
+    0%{ transform: scale(1) rotate(0); filter: brightness(1); opacity: 1; }
+    35%{ transform: scale(1.18) rotate(-4deg); filter: brightness(1.4); }
+    70%{ transform: scale(0.94) rotate(6deg); filter: brightness(0.85); }
+    100%{ transform: scale(0) rotate(18deg); filter: brightness(0.6); opacity: 0; }
+}
+
+.boom-overlay{
+    position: fixed;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0;
+    background:
+        radial-gradient(600px 360px at 50% 45%, rgba(249, 115, 22, 0.55), transparent 60%),
+        radial-gradient(900px 520px at 50% 55%, rgba(239, 68, 68, 0.28), transparent 64%),
+        rgba(0, 0, 0, 0.82);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+
+.boom-overlay.is-active{
+    opacity: 1;
+    animation: boomFade 1200ms ease-out forwards;
+}
+
+.boom-overlay__text{
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-weight: 900;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-size: clamp(68px, 14vw, 190px);
+    color: rgba(255, 255, 255, 0.96);
+    text-shadow:
+        0 0 22px rgba(249, 115, 22, 0.55),
+        0 0 60px rgba(239, 68, 68, 0.30),
+        0 26px 90px rgba(0, 0, 0, 0.70);
+    transform: scale(0.9);
+    animation: boomPop 900ms cubic-bezier(.2,.9,.2,1) forwards;
+}
+
+@keyframes boomPop{
+    0%{ transform: scale(0.7) rotate(-2deg); filter: blur(2px); opacity: 0; }
+    35%{ transform: scale(1.05) rotate(1deg); filter: blur(0); opacity: 1; }
+    100%{ transform: scale(1) rotate(0); opacity: 1; }
+}
+
+@keyframes boomFade{
+    0%{ opacity: 0; }
+    10%{ opacity: 1; }
+    100%{ opacity: 1; }
+}
+
+/* diminuir botões de escolha (colunas 0..4) */
+.btJogoCol0, .btJogoCol1, .btJogoCol2, .btJogoCol3, .btJogoCol4{
+    width: 74px;
+    height: 74px;
+    line-height: 74px;
+    font-size: 74px;
+    border-radius: 16px;
+    margin: 6px;
 }

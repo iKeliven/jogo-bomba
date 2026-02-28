@@ -3,6 +3,93 @@ let tabuleiro = new Array(5)
 for(let i = 0; i < tabuleiro.length;i++){
     tabuleiro[i] = new Array(11)
 }
+
+let gameState = "armed"
+let remainingSeconds = 180
+let timerIntervalId = null
+
+function pad2(n){
+    return String(n).padStart(2, '0')
+}
+
+function setTimerText(){
+    const timerEl = document.getElementById('timer')
+    if(!timerEl) return
+    const m = Math.floor(remainingSeconds / 60)
+    const s = remainingSeconds % 60
+    timerEl.textContent = `${pad2(m)}:${pad2(s)}`
+    if(remainingSeconds <= 30){
+        timerEl.classList.add('timer--danger')
+    }else{
+        timerEl.classList.remove('timer--danger')
+    }
+}
+
+function startTimer(){
+    setTimerText()
+    timerIntervalId = setInterval(() => {
+        if(gameState !== "armed"){
+            clearInterval(timerIntervalId)
+            timerIntervalId = null
+            return
+        }
+        remainingSeconds--
+        if(remainingSeconds <= 0){
+            remainingSeconds = 0
+            setTimerText()
+            explode()
+            return
+        }
+        setTimerText()
+    }, 1000)
+}
+
+function setAllButtonsDisabled(disabled){
+    const buttons = document.querySelectorAll('button')
+    for(const b of buttons){
+        b.disabled = disabled
+    }
+}
+
+function disarm(){
+    if(gameState !== "armed") return
+    gameState = "disarmed"
+    const bombEl = document.getElementById('bomb')
+    if(bombEl) bombEl.classList.add('bomb--disarmed')
+    const boomOverlay = document.getElementById('boomOverlay')
+    if(boomOverlay){
+        boomOverlay.classList.remove('is-active')
+        boomOverlay.setAttribute('aria-hidden', 'true')
+    }
+    const res = document.getElementById('resultado')
+    if(res) res.textContent = 'BOMBA DESARMADA!'
+    setAllButtonsDisabled(true)
+}
+
+function explode(){
+    if(gameState !== "armed") return
+    gameState = "exploded"
+    const bombEl = document.getElementById('bomb')
+    if(bombEl) bombEl.classList.add('bomb--exploded')
+    const boomOverlay = document.getElementById('boomOverlay')
+    if(boomOverlay){
+        boomOverlay.classList.add('is-active')
+        boomOverlay.setAttribute('aria-hidden', 'false')
+    }
+    const res = document.getElementById('resultado')
+    if(res) res.textContent = 'BOOM!'
+    setAllButtonsDisabled(true)
+}
+
+function isLineCorrect(linha){
+    return (
+        document.getElementById("bt" + linha + "0").style.backgroundColor === "blue" &&
+        document.getElementById("bt" + linha + "1").style.backgroundColor === "green" &&
+        document.getElementById("bt" + linha + "2").style.backgroundColor === "purple" &&
+        document.getElementById("bt" + linha + "3").style.backgroundColor === "orange" &&
+        document.getElementById("bt" + linha + "4").style.backgroundColor === "yellow"
+    )
+}
 for(let i = 0; i < tabuleiro.length;i++){
     quebraLinha = document.createElement('br');
     document.body.append(quebraLinha);
@@ -32,11 +119,14 @@ let h1 = document.createElement('h1')
 h1.setAttribute('id', 'resultado')
 document.body.append(h1);
 
+startTimer()
+
 function marca(linha, coluna){
     if(coluna < 5)
     marcarCasa("bt" + linha + '' + coluna)
 }
 function verificaSequencia(linha){
+    if(gameState !== "armed") return
     if(document.getElementById("bt" +linha + "0").style.backgroundColor == "blue"){
         document.getElementById("btResult" + linha + "6").style.backgroundColor = "green"
     }else{
@@ -67,11 +157,23 @@ function verificaSequencia(linha){
         document.getElementById("btResult" + linha + "10").style.backgroundColor = "red"
     }
     document.getElementById("bt" + linha + "4").disabled = true
+
+    if(isLineCorrect(linha)){
+        disarm()
+        return
+    }
+
     for(let x = 0; x < 5; x++){
-        document.getElementById("bt" + contLine + "" + x).disabled = false
-        document.getElementById("btVerifica" + contLine).disabled = false
+        if(contLine < 5){
+            document.getElementById("bt" + contLine + "" + x).disabled = false
+            document.getElementById("btVerifica" + contLine).disabled = false
+        }
     }
     contLine++
+
+    if(contLine > 5){
+        explode()
+    }
 }
 function marcarCasa(nomeBotao){
     switch(cont){
